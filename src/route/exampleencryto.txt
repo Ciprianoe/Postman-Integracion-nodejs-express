@@ -1,0 +1,177 @@
+router.put('/api/admision/', async (req,res) =>{    
+  const response = await fetch('http://jsonplaceholder.typicode.com/albums');
+  const albums = await response.json();             
+  //console.log(albums[0].title);
+  //let title = albums[0].title;
+  //console.log(title);
+
+ 
+    
+    for (var i = 0; i < albums.length; i++) {
+       //let salida = albums[i].title;
+    //console.log(albums[i].title);
+    albumsHash = hash.update(albums[i].title, 'utf-8');
+    hashCreate = albumsHash.digest('hex');
+    console.log("hash : " + hashCreate);
+    //res.json(salida);  
+  }  
+
+
+
+
+
+router.post('/api/admision', async (req,res) =>{    
+  const response = await fetch('http://jsonplaceholder.typicode.com/albums');
+  const albums = await response.json();
+  //console.log(albums)
+
+  //modulo d sha1 
+
+
+  
+
+  for(var i = 0; i < albums.length; i++){
+    let salida = albums[i].title.split()
+
+     let hashed = sha1(salida ++);
+
+     console.log(hashed);
+    
+  }
+
+  });
+
+
+
+
+  OTRO EJEMPLOOOO QUE ESTUVE PROBANDO PERO ME DABA ERROR 
+
+  router.post('/api/admision', async (req,res) =>{    
+  const response = await fetch('http://jsonplaceholder.typicode.com/albums');
+  const albums = await response.json();
+  //console.log(albums)
+
+for (var i1=0; i1<100;i1++){
+  var algh = crypto.getHashes('sha1')[i1];
+
+  for(var i2=0; i2<100;i2++){
+    crypto.createHash(algh).update('title').digest('hex');
+  }
+  console.log(algh);
+}
+
+
+
+
+
+
+
+  //modulo d sha1 funciona solo que no genera hash distintos pero entran el for perfecto  
+
+/*   for(var i = 0; i < albums.length; i++){
+    let salida = albums[i].title.split()
+
+     let hashed = sha1(salida);
+
+     console.log(hashed);
+     //console.log(albums.push({"hash": "hashed!!"}));
+    
+  } // end module sha1 
+   */
+  // con esto solo estoy creado un solo hash como hacer para crear el de todos el
+  /* var albumsHash = hash.update(albums[0].title, 'utf-8');
+  var hashCreate = albumsHash.digest('hex'); 
+  
+  console.log(hashCreate); */
+
+
+  //console.log(sha1('HASH'));
+  
+            
+  
+  //let title = albums[0].title;
+ //JSON.stringify(albums);
+ //console.log(albums);
+ /* const albums = {"userId":"1",
+                    "title":"lorem3 lorem3 lorem3",
+                    "id":1} */
+ 
+
+/* var password = 'algo';
+      const keys =['title'];
+      const algorithm = 'aes256'
+      const encoding = 'hex'
+      const output = cryptoJSON.encrypt(
+        albums, password, {encoding, keys, algorithm}
+        
+      )
+      const salida = output;
+
+      console.log(salida); */
+
+   
+     
+//fin del modulo cryptojson
+
+});
+
+
+
+ // modulo crypto 
+
+/*  router.post('/api/admision/', async (req,res) =>{    
+  const response = await fetch('http://jsonplaceholder.typicode.com/albums');
+  const albums = await response.json();             
+  //console.log(albums[0].title);
+  //let title = albums[0].title;
+  //console.log(title);
+
+  // nice aca recorro todo el array de albums para sacar solo mi title todo esto se va a manejar con el get o se puede manejar con el get
+  for (var i = 0; i < albums.length; i++) {
+    //let salida = albums[i].title;
+ //console.log(albums[i].title);
+ const keys = albums[i].title;
+ JSON.stringify(keys);
+ //console.log(keys);
+}
+ 
+
+
+//console.log(keys);     
+
+    
+    /* for (var i = 0; i < albums.length; i++) {
+       //let salida = albums[i].title;
+    //console.log(albums[i].title);
+    albumsHash = hash.update(albums[i].title, 'utf-8');
+    hashCreate = albumsHash.digest('hex');
+    console.log("hash : " + hashCreate);
+    //res.json(salida);  
+  }  
+
+
+});
+ */ 
+
+
+
+
+
+
+
+/* a continuacion get para generar un hash segun lo solicitado */
+
+
+router.get('/api/admision', async(req,res)=>{
+
+const response = await fetch('http://jsonplaceholder.typicode.com/albums');
+const albums = await response.json();
+albums.forEach(function(album){
+    album.hash = crypto.createHash('sha1').update(JSON.stringify(album.title)).digest('hex')
+
+})
+
+// aca se muestra 
+res.json(albums)
+
+});
